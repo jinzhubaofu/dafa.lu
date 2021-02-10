@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import NextLink from 'next/link';
+import config from '@/lib/config';
 
 import Footer from '@/components/Footer';
 
@@ -13,36 +14,32 @@ export default function Container(props) {
   // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);
 
-  const { children, ...customMeta } = props;
+  const { children, date, ...customMeta } = props;
   const router = useRouter();
-  const meta = {
-    title: 'Lee Robinson – Developer, writer, creator.',
-    description: `Front-end developer, JavaScript enthusiast, and course creator.`,
-    image: 'https://leerob.io/static/images/banner.png',
-    type: 'website',
-    ...customMeta
-  };
+
+  const logoUrl = `https://${config.site.hostname}/static/images/banner.png`;
 
   return (
     <div className="bg-white dark:bg-black">
       <Head>
-        <title>{meta.title}</title>
+        <title>{config.site.title}</title>
         <meta name="robots" content="follow, index" />
-        <meta content={meta.description} name="description" />
-        <meta property="og:url" content={`https://leerob.io${router.asPath}`} />
-        <meta property="og:type" content={meta.type} />
-        <meta property="og:site_name" content="Lee Robinson" />
-        <meta property="og:description" content={meta.description} />
-        <meta property="og:title" content={meta.title} />
-        <meta property="og:image" content={meta.image} />
+        <meta content={config.site.description} name="description" />
+        <meta
+          property="og:url"
+          content={`https://${config.site.hostname}/${router.asPath}`}
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content={config.author.name} />
+        <meta property="og:description" content={config.site.description} />
+        <meta property="og:title" content={config.site.title} />
+        <meta property="og:image" content={logoUrl} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@leeerob" />
-        <meta name="twitter:title" content={meta.title} />
-        <meta name="twitter:description" content={meta.description} />
-        <meta name="twitter:image" content={meta.image} />
-        {meta.date && (
-          <meta property="article:published_time" content={meta.date} />
-        )}
+        <meta name="twitter:site" content={config.socialPlatforms.twitter} />
+        <meta name="twitter:title" content={config.site.title} />
+        <meta name="twitter:description" content={config.site.description} />
+        <meta name="twitter:image" content={logoUrl} />
+        {date && <meta property="article:published_time" content={date} />}
       </Head>
       <nav className="sticky-nav flex justify-between items-center max-w-4xl w-full p-8 my-0 md:my-8 mx-auto bg-white dark:bg-black bg-opacity-60">
         <a href="#skip" className="sr-only focus:not-sr-only">

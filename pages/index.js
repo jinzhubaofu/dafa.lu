@@ -6,7 +6,9 @@ import BlogPost from '../components/BlogPost';
 import Subscribe from '../components/Subscribe';
 import ProjectCard from '../components/ProjectCard';
 
-export default function Home() {
+import { getFilesTotal } from '@/lib/mdx';
+
+export default function Home({ newslettersCount }) {
   return (
     <Container>
       <div className="flex flex-col justify-center items-start max-w-2xl mx-auto mb-16">
@@ -55,8 +57,13 @@ export default function Home() {
           icon="fastfeedback"
         />
         <Timeline />
-        <Subscribe />
+        <Subscribe totalIssues={newslettersCount} />
       </div>
     </Container>
   );
+}
+
+export async function getStaticProps() {
+  const newslettersCount = await getFilesTotal('newsletter');
+  return { props: { newslettersCount } };
 }

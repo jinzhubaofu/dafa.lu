@@ -4,7 +4,7 @@ import ViewCounter from '@/components/ViewCounter';
 import Avatar from '@/components/Avatar';
 import { getDiscussionUrl, getEditUrl } from '@/lib/utils/url';
 
-export default function BlogLayout({ children, frontMatter }) {
+export default function BlogLayout({ children, frontMatter, newsletterCount }) {
   return (
     <Container
       title={`${frontMatter.title} – Lee Robinson`}
@@ -29,7 +29,7 @@ export default function BlogLayout({ children, frontMatter }) {
           {children}
         </div>
         <div className="mt-8">
-          <Subscribe />
+          <Subscribe totalIssues={newsletterCount} />
         </div>
         <div className="text-sm text-gray-700 dark:text-gray-300">
           <a

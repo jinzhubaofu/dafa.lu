@@ -1,3 +1,5 @@
+import config from '@/lib/config';
+
 export default async (req, res) => {
   const { email } = req.body;
 
@@ -12,7 +14,7 @@ export default async (req, res) => {
       {
         body: JSON.stringify({
           email,
-          tags: ['leerob.io']
+          tags: [config.site.hostname]
         }),
         headers: {
           Authorization: `Token ${API_KEY}`,

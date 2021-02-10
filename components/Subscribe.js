@@ -1,21 +1,20 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import useSWR from 'swr';
 import format from 'comma-number';
-import { trackGoal } from 'fathom-client';
 
 import fetcher from '@/lib/fetcher';
 import SuccessMessage from '@/components/SuccessMessage';
 import ErrorMessage from '@/components/ErrorMessage';
 import LoadingSpinner from '@/components/LoadingSpinner';
 
-export default function Subscribe() {
+export default function Subscribe({ totalIssues }) {
   const [form, setForm] = useState(false);
   const inputEl = useRef(null);
   const { data } = useSWR('/api/subscribers', fetcher);
   const subscriberCount = format(data?.count);
 
-  const subscribe = async (e) => {
+  const subscribe = useCallback(async (e) => {
     e.preventDefault();
     setForm({ state: 'loading' });
 
@@ -38,13 +37,12 @@ export default function Subscribe() {
       return;
     }
 
-    trackGoal('JYFUFMSF', 0);
     inputEl.current.value = '';
     setForm({
       state: 'success',
       message: `Hooray! You're now on the list.`
     });
-  };
+  });
 
   return (
     <div className="border border-blue-200 rounded p-6 my-4 w-full dark:border-gray-800 bg-blue-50 dark:bg-blue-opaque">
@@ -80,7 +78,7 @@ export default function Subscribe() {
         <p className="text-sm text-gray-800 dark:text-gray-200">
           {`${subscriberCount || '-'} subscribers – `}
           <Link href="/newsletter">
-            <a>27 issues</a>
+            <a>{totalIssues || 0} issues</a>
           </Link>
         </p>
       )}

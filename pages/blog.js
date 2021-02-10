@@ -11,7 +11,7 @@ export default function Blog({ posts }) {
       (a, b) =>
         Number(new Date(b.publishedAt)) - Number(new Date(a.publishedAt))
     )
-    .filter((frontMatter) =>
+    .filter(frontMatter =>
       frontMatter.title.toLowerCase().includes(searchValue.toLowerCase())
     );
 
@@ -33,7 +33,7 @@ export default function Blog({ posts }) {
           <input
             aria-label="Search articles"
             type="text"
-            onChange={(e) => setSearchValue(e.target.value)}
+            onChange={e => setSearchValue(e.target.value)}
             placeholder="Search articles"
             className="px-4 py-2 border border-gray-300 dark:border-gray-900 focus:ring-blue-500 focus:border-blue-500 block w-full rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
           />
@@ -78,7 +78,7 @@ export default function Blog({ posts }) {
           All Posts
         </h3>
         {!filteredBlogPosts.length && 'No posts found.'}
-        {filteredBlogPosts.map((frontMatter) => (
+        {filteredBlogPosts.map(frontMatter => (
           <BlogPost key={frontMatter.title} {...frontMatter} />
         ))}
       </div>
@@ -88,6 +88,5 @@ export default function Blog({ posts }) {
 
 export async function getStaticProps() {
   const posts = await getAllFilesFrontMatter('blog');
-
   return { props: { posts } };
 }

@@ -63,7 +63,7 @@
     "unist-util-visit": "2.0.3"
   },
   "prettier": {
-    "arrowParens": "always",
+    "arrowParens": "avoid",
     "singleQuote": true,
     "tabWidth": 2,
     "trailingComma": "none"
