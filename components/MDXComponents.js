@@ -9,8 +9,9 @@ import Unsplash from '@/components/metrics/Unsplash';
 import Analytics from '@/components/metrics/Analytics';
 import YouTube from '@/components/metrics/Youtube';
 import Step from '@/components/Step';
+import CivilizationIcon from './CivilizationIcon';
 
-const CustomLink = (props) => {
+const CustomLink = props => {
   const href = props.href;
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'));
 
@@ -35,7 +36,8 @@ const MDXComponents = {
   Step,
   Tweet,
   Unsplash,
-  YouTube
+  YouTube,
+  CivilizationIcon
 };
 
 export default MDXComponents;

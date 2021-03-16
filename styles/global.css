@@ -29,6 +29,10 @@ html {
   min-height: 100vh;
 }
 
+.article {
+  letter-spacing: 0.4px;
+}
+
 .sticky-nav {
   position: sticky;
   z-index: 10;
