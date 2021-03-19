@@ -1,9 +1,6 @@
-import db from '@/lib/firebase';
+import { getAllBlogViews } from '@/lib/blog';
 
 export default async (_, res) => {
-  const snapshot = await db.ref('views').once('value');
-  const views = snapshot.val();
-  const allViews = Object.values(views).reduce((total, value) => total + value);
-
-  return res.status(200).json({ total: allViews });
+  const report = await getAllBlogViews();
+  return res.status(200).json(report);
 };

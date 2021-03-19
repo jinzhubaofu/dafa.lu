@@ -33,15 +33,15 @@ export default function Dashboard() {
           </p>
         </div>
         <div className="flex flex-col w-full">
-          <Unsplash />
-          <YouTube />
+          {/* <Unsplash /> */}
+          {/* <YouTube /> */}
         </div>
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
           <Analytics />
-          <GitHub />
+          {/* <GitHub /> */}
         </div>
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 my-2 w-full">
-          <Gumroad />
+          {/* <Gumroad /> */}
           <Buttondown />
         </div>
         <h2 className="font-bold text-3xl tracking-tight mb-4 mt-16 text-black dark:text-white">
@@ -51,7 +51,7 @@ export default function Dashboard() {
           Curious what I'm currently jamming to? Here's my top tracks on Spotify
           updated daily.
         </p>
-        <TopTracks />
+        {/* <TopTracks /> */}
       </div>
     </Container>
   );
