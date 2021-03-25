@@ -10,6 +10,7 @@ import Analytics from '@/components/metrics/Analytics';
 import YouTube from '@/components/metrics/Youtube';
 import Step from '@/components/Step';
 import CivilizationIcon from './CivilizationIcon';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 const CustomLink = props => {
   const href = props.href;
@@ -26,8 +27,35 @@ const CustomLink = props => {
   return <a target="_blank" rel="noopener noreferrer" {...props} />;
 };
 
+const ScalableImage = props => {
+  const ref = useRef(null);
+  const [isLoading, finish] = useState(true);
+
+  useLayoutEffect(() => {
+    if (ref.current) {
+      const { offsetWidth, offsetHeight } = ref.current;
+      console.log('layout', offsetWidth, offsetHeight);
+    }
+  }, []);
+
+  return (
+    <div className="relative">
+      <Image
+        {...props}
+        onClick={e => {
+          console.log(e);
+        }}
+        onLoad={e => finish(false)}
+      />
+      {isLoading ? (
+        <div className="inset-absolute-center">loading...</div>
+      ) : null}
+    </div>
+  );
+};
+
 const MDXComponents = {
-  Image,
+  Image: ScalableImage,
   a: CustomLink,
   Analytics,
   ConsCard,
